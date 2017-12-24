@@ -32,4 +32,4 @@ effekseerとeffekseer-12x、effekseer-for-dxlibとeffekseer-for-dxlib-12x は共
 
 ## ライセンス
 
-本リポジトリのコードは(MITライセンス)[./LICENSE]の下で公開しています。
+本リポジトリのコードは[MITライセンス](./LICENSE)の下で公開しています。

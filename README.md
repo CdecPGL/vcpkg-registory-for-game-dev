@@ -35,4 +35,4 @@ effekseer and effekseer-12x, effekseer-for-dxlib and effekseer-for-dxlib-12x can
 
 ## License
 
-The codes in this repository are lisenced unfer the (MIT License)[./LICENSE].
+The codes in this repository are lisenced unfer the [MIT License](./LICENSE).
