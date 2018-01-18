@@ -13,7 +13,7 @@ If you want to know details of vcpkg, please visit [the repository of vcpkg](htt
 1. Copy them to "[vcpkg root directory]/ports"
 1. Move to the root directory of vcpkg and install the packages as bellow:
 
-```:ps
+```ps
 vcpkg.exe install [the package name]:[triplet]
 ```
 

@@ -10,7 +10,7 @@ vcpkgの詳細については[vcpkgのリポジトリ](https://github.com/Micros
 1. 見つけたポートディレクトリを"[vcpkgのルート]/ports"下にコピーする
 1. vcpkgのルートディレクトリに移動し以下のコマンドを実行してインストール:
 
-```:ps
+```ps
 vcpkg.exe install [パッケージ名]:[トリプレット]
 ```
 
