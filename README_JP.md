@@ -1,6 +1,6 @@
-# Additional Packages for Vcpkg
+# Vcpkg Registory for Game Dev
 
-本リポジトリは、vcpkgのパブリックキュレーションレジストリには含まれていない追加のパッケージを含むvcpkgレジストリです。
+本リポジトリは、vcpkgのパブリックキュレーションレジストリには含まれていないゲーム開発関連のパッケージを含むvcpkgレジストリです。
 vcpkgのパブリックキュレーションレジストリに含まれていないパッケージを提供するvcpkgレジストリです。
 
 本リポジトリの内容はすべてVisual Studio 2022をターゲットとしています。

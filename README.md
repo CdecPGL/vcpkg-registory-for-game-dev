@@ -1,8 +1,8 @@
-# Additional Packages for Vcpkg
+# Vcpkg Registory for Game Dev
 
 [READMEの日本語版はこちら](./README_JP.md)
 
-This repository is a vcpkg registry which contains additional packages which are not included in the public curated registry.
+This repository is a vcpkg registry which contains packages for game development which are not included in the public curated registry.
 If you want to know details of vcpkg, please visit [the repository of vcpkg](https://github.com/Microsoft/vcpkg).
 
 All codes in this repository are targetting Visual Studio 2022.
