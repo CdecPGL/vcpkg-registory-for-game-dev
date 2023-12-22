@@ -41,6 +41,22 @@ Each line in bellow list consists of "[package name in vcpkg]: [package name] [v
 - effekseer-for-dxlib: [EffekseerForDxLib](https://github.com/effekseer/EffekseerForDXLib) 1.70e (x86-windows-static, x64-windows-static)
 - lua-intf: [LuaIntf](https://github.com/SteveKChiu/lua-intf) commit in Dec. 24, 2021 (all)
 
+## Management of This Repository
+
+### How to Add or Update a Package
+
+To add or update a package in this repository, follow the steps below.
+
+1. Add or update a port in `ports` directory.
+    - If you update a port without changing its version, increment `port-number` in `vcpkg.json`.
+    - If you update a port with changing its version, remove `port-number` in `vcpkg.json`.
+1. Update version database.
+    ```ps1
+    vcpkg --x-builtin-ports-root=./ports --x-builtin-registry-versions-dir=./versions x-add-version --all --verbose
+    ```
+
+For more details, please visit [vcpkg documentation "Tutorial: Publish packages to a private vcpkg registry using Git"](https://learn.microsoft.com/en-us/vcpkg/produce/publish-to-a-git-registry).
+
 ## License
 
 The codes in this repository are lisenced under the [MIT License](./LICENSE).

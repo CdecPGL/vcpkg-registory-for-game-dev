@@ -39,6 +39,22 @@ vcpkg install [パッケージ名]:[トリプレット]
 - effekseer-for-dxlib: [EffekseerForDXライブラリ](https://github.com/effekseer/EffekseerForDXLib) 1.70e (x86-windows-static, x64-windows-static)
 - lua-intf: [LuaIntf](https://github.com/SteveKChiu/lua-intf) 2021/12/24のコミット (全て)
 
+## 本リポジトリの管理
+
+### パッケージの追加・更新方法
+
+本リポジトリにパッケージを追加するには、以下の手順を踏みます。
+
+1. `ports`ディレクトリのポートを追加・更新する
+    - バージョンの変更を伴わない更新をした場合は、`vcpkg.json`の`port-number`をインクリメントする
+    - バージョンの変更を伴う更新をした場合は、`vcpkg.json`の`port-number`を削除
+1. バージョンデータベースを更新する
+    ```ps1
+    vcpkg --x-builtin-ports-root=./ports --x-builtin-registry-versions-dir=./versions x-add-version --all --verbose
+    ```
+
+詳細については[vcpkgのドキュメント「チュートリアル: Git を使用してプライベート vcpkg レジストリにパッケージを発行する」](https://learn.microsoft.com/ja-jp/vcpkg/produce/publish-to-a-git-registry)をご覧ください。
+
 ## ライセンス
 
 本リポジトリのコードは[MITライセンス](./LICENSE)の下で公開しています。

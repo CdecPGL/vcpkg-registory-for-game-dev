@@ -1,3 +1,16 @@
 {
-    "default": {}
+  "default": {
+    "dxlib": {
+      "baseline": "3.24-b",
+      "port-version": 0
+    },
+    "effekseer-for-dxlib": {
+      "baseline": "1.70-e",
+      "port-version": 0
+    },
+    "lua-intf": {
+      "baseline": "2021-12-24",
+      "port-version": 0
+    }
+  }
 }

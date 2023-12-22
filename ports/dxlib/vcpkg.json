@@ -2,7 +2,6 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "dxlib",
   "version": "3.24-b",
-  "port-version": 0,
   "description": "The wrapper library of DirectX.",
   "homepage": "https://dxlib.xsrv.jp",
   "supports": "windows & (x86 | x64) & static"

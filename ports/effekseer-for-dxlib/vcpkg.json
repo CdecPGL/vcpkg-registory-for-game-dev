@@ -2,7 +2,6 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "effekseer-for-dxlib",
   "version": "1.70-e",
-  "port-version": 0,
   "description": "The runtime library of Effekseer fo DXLibrary.",
   "homepage": "https://effekseer.github.io/jp/index.html",
   "supports": "windows & (x86 | x64) & static",
