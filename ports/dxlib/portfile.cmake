@@ -1,6 +1,6 @@
 # Specify version
 set(MAJOR_VERSION 3)
-set(MINOR_VERSION 19)
+set(MINOR_VERSION 24b)
 set(VERSION ${MAJOR_VERSION}.${MINOR_VERSION})
 
 include(vcpkg_common_functions)
@@ -11,19 +11,13 @@ if((NOT ${TARGET_TRIPLET} MATCHES "x86-windows-static") AND (NOT ${TARGET_TRIPLE
 endif()
 
 # Prepair sources
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/DxLib_VC)
+set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/DxLib_VC${MAJOR_VERSION}_${MINOR_VERSION}/DxLib_VC)
 vcpkg_download_distfile(ARCHIVE
-    URLS "http://dxlib.o.oo7.jp/DxLib/DxLib_VC${MAJOR_VERSION}_${MINOR_VERSION}.exe"
-    FILENAME "dxlib-${VERSION}.exe"
-    SHA512 36287fa941ffe15777ca4f8547aa933a0597051612739f07f8ffdf05a6c9b7c391d55b06774482596618f738b9e1e77eb132f8b0397000e165c64e806fd2b048
+    URLS "https://dxlib.xsrv.jp/DxLib/DxLib_VC${MAJOR_VERSION}_${MINOR_VERSION}.zip"
+    FILENAME "dxlib-${VERSION}.zip"
+    SHA512 5d3f164cfb201d71ff2274dd12d5d0a65f09e6c4b31a20ae5a6a48560c3a08db876297e6c0e7eab8de31979d4addfbd1cfe2a65d8cf65bc5dc596e079f54d5f4
 )
-file(COPY ${ARCHIVE} DESTINATION ${CURRENT_BUILDTREES_DIR}/src)
-file(REMOVE_RECURSE ${SOURCE_PATH})
-vcpkg_execute_required_process(
-    COMMAND ./dxlib-${VERSION}.exe
-    WORKING_DIRECTORY ${CURRENT_BUILDTREES_DIR}/src
-    LOGNAME extract-${TARGET_TRIPLET}
-)
+vcpkg_extract_source_archive(${ARCHIVE})
 
 # Copy libraries (to avoid LNK2005, except wide character library whose name includes "W")
 file(GLOB INDLUDES ${SOURCE_PATH}/プロジェクトに追加すべきファイル_VC用/*.h)

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "lua-intf",
+  "version-date": "2021-12-24",
+  "port-version": 0,
+  "description": "A binding between C++11 and Lua language.",
+  "homepage": "https://github.com/SteveKChiu/lua-intf",
+  "license": "MIT",
+  "supports": "windows & (x86 | x64) & static",
+  "dependencies": [
+    {
+      "name": "lua",
+      "version>=": "5.3.0"
+    }
+  ]
+}
