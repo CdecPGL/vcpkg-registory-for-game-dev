@@ -12,7 +12,7 @@ vcpkgのパブリックキュレーションレジストリに含まれていな
 ```json
     {
       "kind": "git",
-      "repository": "https://github.com/CdecPGL/Additional-Packages-for-Vcpkg",
+      "repository": "https://github.com/CdecPGL/vcpkg-registory-for-game-dev",
       "baseline": "<本リポジトリの特定のコミットハッシュ>",
       "packages": [ "dxlib", "effekseer-for-dxlib", "lua-intf" ]
     }

@@ -14,7 +14,7 @@ Add the following lines to `vcpkg-configuration.json` of your project.
 ```json
     {
       "kind": "git",
-      "repository": "https://github.com/CdecPGL/Additional-Packages-for-Vcpkg",
+      "repository": "https://github.com/CdecPGL/vcpkg-registory-for-game-dev",
       "baseline": "<commit hash of this repository>",
       "packages": [ "dxlib", "effekseer-for-dxlib", "lua-intf" ]
     }
