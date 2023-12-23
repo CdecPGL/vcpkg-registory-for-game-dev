@@ -9,7 +9,12 @@ vcpkg_extract_source_archive(EXTRACTED_DIR
 )
 
 # Copy libraries
+file(INSTALL ${EXTRACTED_DIR}/プロジェクトに追加すべきファイル_VC用/Effekseer.h DESTINATION ${CURRENT_PACKAGES_DIR}/include)
+file(INSTALL ${EXTRACTED_DIR}/プロジェクトに追加すべきファイル_VC用/Effekseer.Modules.h DESTINATION ${CURRENT_PACKAGES_DIR}/include)
+file(INSTALL ${EXTRACTED_DIR}/プロジェクトに追加すべきファイル_VC用/Effekseer.SIMD.h DESTINATION ${CURRENT_PACKAGES_DIR}/include)
 file(INSTALL ${EXTRACTED_DIR}/プロジェクトに追加すべきファイル_VC用/EffekseerForDXLib.h DESTINATION ${CURRENT_PACKAGES_DIR}/include)
+file(INSTALL ${EXTRACTED_DIR}/プロジェクトに追加すべきファイル_VC用/EffekseerRendererDX9.h DESTINATION ${CURRENT_PACKAGES_DIR}/include)
+file(INSTALL ${EXTRACTED_DIR}/プロジェクトに追加すべきファイル_VC用/EffekseerRendererDX11.h DESTINATION ${CURRENT_PACKAGES_DIR}/include)
 
 file(INSTALL ${EXTRACTED_DIR}/プロジェクトに追加すべきファイル_VC用/Effekseer_vs2022_${TRIPLET_SYSTEM_ARCH}.lib DESTINATION ${CURRENT_PACKAGES_DIR}/lib)
 file(INSTALL ${EXTRACTED_DIR}/プロジェクトに追加すべきファイル_VC用/EffekseerRendererDX9_vs2022_${TRIPLET_SYSTEM_ARCH}.lib DESTINATION ${CURRENT_PACKAGES_DIR}/lib)
