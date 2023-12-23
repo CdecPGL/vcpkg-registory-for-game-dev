@@ -48,10 +48,12 @@ vcpkg install [パッケージ名]:[トリプレット]
 1. `ports`ディレクトリのポートを追加・更新する
     - バージョンの変更を伴わない更新をした場合は、`vcpkg.json`の`port-number`をインクリメントする
     - バージョンの変更を伴う更新をした場合は、`vcpkg.json`の`port-number`を削除
+1. `ports`ディレクトリの変更をコミットする
 1. バージョンデータベースを更新する
     ```ps1
     vcpkg --x-builtin-ports-root=./ports --x-builtin-registry-versions-dir=./versions x-add-version --all --verbose
     ```
+1. バージョンデータベースの変更をコミットする
 
 詳細については[vcpkgのドキュメント「チュートリアル: Git を使用してプライベート vcpkg レジストリにパッケージを発行する」](https://learn.microsoft.com/ja-jp/vcpkg/produce/publish-to-a-git-registry)をご覧ください。
 

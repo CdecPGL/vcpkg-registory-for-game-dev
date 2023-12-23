@@ -4,5 +4,11 @@
   "version": "3.24-b",
   "description": "The wrapper library of DirectX.",
   "homepage": "https://dxlib.xsrv.jp",
-  "supports": "windows & (x86 | x64) & static"
+  "supports": "windows & (x86 | x64) & static",
+  "dependencies": [
+    {
+      "name": "zlib",
+      "version>=": "1.2.8"
+    }
+  ]
 }

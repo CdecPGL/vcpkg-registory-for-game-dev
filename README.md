@@ -50,10 +50,12 @@ To add or update a package in this repository, follow the steps below.
 1. Add or update a port in `ports` directory.
     - If you update a port without changing its version, increment `port-number` in `vcpkg.json`.
     - If you update a port with changing its version, remove `port-number` in `vcpkg.json`.
+1. Commit changes in `ports` directory.
 1. Update version database.
     ```ps1
     vcpkg --x-builtin-ports-root=./ports --x-builtin-registry-versions-dir=./versions x-add-version --all --verbose
     ```
+1. Commit changes in version database.
 
 For more details, please visit [vcpkg documentation "Tutorial: Publish packages to a private vcpkg registry using Git"](https://learn.microsoft.com/en-us/vcpkg/produce/publish-to-a-git-registry).
 
