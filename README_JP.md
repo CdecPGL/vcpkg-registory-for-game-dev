@@ -3,8 +3,6 @@
 本リポジトリは、vcpkgのパブリックキュレーションレジストリには含まれていないゲーム開発関連のパッケージを含むvcpkgレジストリです。
 vcpkgのパブリックキュレーションレジストリに含まれていないパッケージを提供するvcpkgレジストリです。
 
-本リポジトリの内容はすべてVisual Studio 2022をターゲットとしています。
-
 ## 使用方法
 
 対象プロジェクトの`vcpkg-configuration.json`において、`registories`に以下を追加します。
@@ -32,14 +30,22 @@ vcpkg install [パッケージ名]:[トリプレット]
 
 ## パッケージ
 
-現在、本リポジトリには3つのパッケージが含まれています。
-以下の一覧において、それぞれのラインは"[vcpkgでのパッケージ名]: [パッケージ名] [バージョン] (対応トリプレット)"のように構成されています。
+現在、本リポジトリには以下のパッケージが含まれています。
 
-- dxlib: [DXライブラリ](http://dxlib.o.oo7.jp/) 3.24b (x86-windows-static, x64-windows-static)
-- effekseer-for-dxlib: [EffekseerForDXライブラリ](https://github.com/effekseer/EffekseerForDXLib) 1.70e (x86-windows-static, x64-windows-static)
-- lua-intf: [LuaIntf](https://github.com/SteveKChiu/lua-intf) 2021/12/24のコミット (全て)
+- dxlib: [DXライブラリ](http://dxlib.o.oo7.jp/)
+    - 最新バージョン: 3.24-b
+    - 対応トリプレット: x86-windows, x86-windows-static, x64-windows, x64-windows-static
+    - 対応プラットフォーム: Windows（Visual Studio 2015以降）
+- effekseer-for-dxlib: [EffekseerForDXライブラリ](https://github.com/effekseer/EffekseerForDXLib)
+    - 最新バージョン: 1.70-e
+    - 対応トリプレット: x86-windows-static, x64-windows-static
+    - 対応プラットフォーム: Windows（Visual Studio 2019以降）
+- lua-intf: [LuaIntf](https://github.com/SteveKChiu/lua-intf)
+    - 最新バージョン: 2021-12-24
+    - 対応トリプレット: 全て
+    - 対応プラットフォーム: 全て
 
-## 本リポジトリの管理
+## レジストリの管理
 
 ### パッケージの追加・更新方法
 

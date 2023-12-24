@@ -5,8 +5,6 @@
 This repository is a vcpkg registry which contains packages for game development which are not included in the public curated registry.
 If you want to know details of vcpkg, please visit [the repository of vcpkg](https://github.com/Microsoft/vcpkg).
 
-All codes in this repository are targetting Visual Studio 2022.
-
 ## Usage
 
 Add the following lines to `vcpkg-configuration.json` of your project.
@@ -34,14 +32,22 @@ For more details, please visit [vcpkg documentation "Tutorial: Install a depende
 
 ## Packages
 
-Currently, there are 3 packages in this repository.
-Each line in bellow list consists of "[package name in vcpkg]: [package name] [version] (support triplets)".
+Currently, there are following packages in this repository.
 
-- dxlib: [DXLibrary](http://dxlib.o.oo7.jp/) 3.24b (x86-windows-static, x64-windows-static)
-- effekseer-for-dxlib: [EffekseerForDxLib](https://github.com/effekseer/EffekseerForDXLib) 1.70e (x86-windows-static, x64-windows-static)
-- lua-intf: [LuaIntf](https://github.com/SteveKChiu/lua-intf) commit in Dec. 24, 2021 (all)
+- dxlib: [DX Library](http://dxlib.o.oo7.jp/)
+    - Latest Version: 3.24-b
+    - Supported Triplets: x86-windows, x86-windows-static, x64-windows, x64-windows-static
+    - Supported Platforms: Windows (Visual Studio 2015 or later)
+- effekseer-for-dxlib: [EffekseerForDX Library](https://github.com/effekseer/EffekseerForDXLib)
+    - Latest Version: 1.70-e
+    - Supported Triplets: x86-windows-static, x64-windows-static
+    - Supported Platforms: Windows (Visual Studio 2019 or later)
+- lua-intf: [LuaIntf](https://github.com/SteveKChiu/lua-intf)
+    - Latest Version: 2021-12-24
+    - Supported Triplets: All
+    - Supported Platforms: All
 
-## Management of This Repository
+## Registry Management
 
 ### How to Add or Update a Package
 

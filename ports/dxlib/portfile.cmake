@@ -13,90 +13,73 @@ vcpkg_extract_source_archive(EXTRACTED_DIR
     ARCHIVE ${ARCHIVE}
 )
 
+if(${VCPKG_LIBRARY_LINKAGE} MATCHES "static")
+        set(REL_LIB_LINKAGE "MT")
+        set(DEB_LIB_LINKAGE "MTd")
+        message(NOTICE "VCPKG_LIBRARY_LINKAGE is static")
+elseif(${VCPKG_LIBRARY_LINKAGE} MATCHES "dynamic")
+        set(REL_LIB_LINKAGE "MD")
+        set(DEB_LIB_LINKAGE "MDd")
+        message(NOTICE "VCPKG_LIBRARY_LINKAGE is dynamic")
+else()
+        message(FATAL_ERROR "Unknown VCPKG_LIBRARY_LINKAGE: ${VCPKG_LIBRARY_LINKAGE}")
+endif()
+
 #In distributed library files of dxlib, each library is named as follows:
 # <LIB_NAME><WIDE_CHARACTER_LABEL>_<VS_VERSION>_<ARCHITECTURE>_<TARGET>.lib
 # - <LIB_NAME>: Name of library
 # - <WIDE_CHARACTER_LABEL>: W or empty (not wide character)
 # - <VS_VERSION>: vc6, vc8, vs2012, vs2013, vs2015 or empty (for vs2019 or later)
-# - <ARCHITECTURE>: x64 or empty
-#    - empty is same as "x86" and "x86" is not used when vs version is vs2019 or later
+#    - empty is for vs2010 or former
+#    - vs2015 is for vs2015 or later
+# - <ARCHITECTURE>: x64, x86 or empty
+#    - empty is same as "x86" and used when vs version is empty
 # - <TARGET>: d, MT, MD, MTd, MDd or empty
-#     - "d" is same as "MTd" and "MTd" is not used when vs version is vs2019 or later
-#     - empty is same as "MT" and "MT" is not used when vs version is vs2019 or later
-#     - "MD" and "MDd" is not used when vs version is vs2019 or later
-# We ignore libraries not for vs2019 or later to make this file simple.
-# We also ignore wide character libraries to avoid LNK2005.
-if(${TRIPLET_SYSTEM_ARCH} MATCHES "x86")
-        set(EXCLUDE_LIB_ARCH_SUFFIX "_x64")
-elseif(${TRIPLET_SYSTEM_ARCH} MATCHES "x64")
-        set(LIB_ARCH_SUFFIX "_x64")
-else()
-        message(FATAL_ERROR "Unsupported architecture: ${TRIPLET_SYSTEM_ARCH}")
-endif()
+#     - "d" is same as "MTd" and used when vs version is empty
+#     - empty is same as "MT" and used when vs version is empty
+#     - "MD" and "MDd" is not used when vs version is empty
+# These conditions are defined in "DxDataTypeWin.h".
+# We ignore libraries not for vs2015 or later to make this file simple.
+# We also ignore wide character libraries whose name includes "W" to avoid LNK2005.
+list(APPEND LIB_NAMES DxLib)
+list(APPEND LIB_NAMES DxDrawFunc)
+list(APPEND LIB_NAMES DxUseCLib)
+list(APPEND LIB_NAMES libbulletcollision)
+list(APPEND LIB_NAMES libbulletdynamics)
+list(APPEND LIB_NAMES libbulletmath)
+list(APPEND LIB_NAMES libtiff)
+list(APPEND LIB_NAMES libpng)
+list(APPEND LIB_NAMES zlib)
+list(APPEND LIB_NAMES libjpeg)
+list(APPEND LIB_NAMES ogg_static)
+list(APPEND LIB_NAMES vorbis_static)
+list(APPEND LIB_NAMES vorbisfile_static)
+list(APPEND LIB_NAMES libtheora_static)
+list(APPEND LIB_NAMES opus)
+list(APPEND LIB_NAMES opusfile)
+list(APPEND LIB_NAMES silk_common)
+list(APPEND LIB_NAMES celt)
 
 ################################
 # Install headers
 ################################
-file(GLOB INDLUDES ${EXTRACTED_DIR}/プロジェクトに追加すべきファイル_VC用/*${LIB_ARCH_SUFFIX}.h)
+file(GLOB INDLUDES ${EXTRACTED_DIR}/プロジェクトに追加すべきファイル_VC用/*.h)
 file(INSTALL ${INDLUDES} DESTINATION ${CURRENT_PACKAGES_DIR}/include)
 
 ################################
 # Install libraries for release
 ################################
-# Glob all libraries
-# Result: <all label names><empty or "W"><empty | _(all vs versions)><empty | _(all architectures)><empty | _(all targets)>.lib
-file(GLOB REL_LIBS ${EXTRACTED_DIR}/プロジェクトに追加すべきファイル_VC用/*.lib)
-# Exclude libraries whose vs version is not vs2019_or_later (vc6, vc8, vs2012, vs2013, vs2015)
-# Result: <all label names><empty | "W"><empty | _x64><empty | _d>.lib
-list(FILTER REL_LIBS EXCLUDE REGEX "^.+_(vc6|vc8|vs2012|vs2013|vs2015).*\.lib$")
-# Exclude libraries whose target is debug
-# Result: <all label names><empty | "W"><empty | _x64>.lib
-list(FILTER REL_LIBS EXCLUDE REGEX "^.+_d\.lib$")
-
-# Exclude libraries whose architecture is ${LIB_ARCH_SUFFIX}
-# Result: <all label names><empty | "W">${LIB_ARCH_SUFFIX}.lib
-if(DEFINED LIB_ARCH_SUFFIX)
-        list(FILTER REL_LIBS INCLUDE REGEX "^.+${LIB_ARCH_SUFFIX}\.lib$")
-endif()
-if(DEFINED EXCLUDE_LIB_ARCH_SUFFIX)
-        list(FILTER REL_LIBS EXCLUDE REGEX "^.+${EXCLUDE_LIB_ARCH_SUFFIX}\.lib$")
-endif()
-
-# Exclude libraries for wide character
-# Result: <all label names>${LIB_ARCH_SUFFIX}.lib
-list(FILTER REL_LIBS EXCLUDE REGEX "^.+W${LIB_ARCH_SUFFIX}\.lib$")
-# Exclude zlib because zlib will be installed as dependencies
-# Result: <all label names without zlib>${LIB_ARCH_SUFFIX}.lib
-list(FILTER REL_LIBS EXCLUDE REGEX "^.+\/zlib${LIB_ARCH_SUFFIX}\.lib$")
-# Copy libraries for release
+foreach(LIB_NAME IN LISTS LIB_NAMES)
+    list(APPEND REL_LIBS ${EXTRACTED_DIR}/プロジェクトに追加すべきファイル_VC用/${LIB_NAME}_vs2015_${TRIPLET_SYSTEM_ARCH}_${REL_LIB_LINKAGE}.lib)
+endforeach()
 file(INSTALL ${REL_LIBS} DESTINATION ${CURRENT_PACKAGES_DIR}/lib)
 
 ################################
 # Install libraries for debug
 ################################
-# Glob libraries for debug
-# Result: <all label names><empty or "W"><empty | _(all vs versions)><empty | _(all architectures)>_d.lib
-file(GLOB DEB_LIBS ${EXTRACTED_DIR}/プロジェクトに追加すべきファイル_VC用/*${LIB_ARCH_SUFFIX}_d.lib)
-# Exclude libraries whose vs version is not vs2019_or_later (vc6, vc8, vs2012, vs2013, vs2015)
-# Result: <all label names><empty | "W"><empty | _x64>_d.lib
-list(FILTER DEB_LIBS EXCLUDE REGEX "^.+_(vc6|vc8|vs2012|vs2013|vs2015).*\.lib$")
-
-# Exclude libraries whose architecture is ${LIB_ARCH_SUFFIX}
-# Result: <all label names><empty | "W">${LIB_ARCH_SUFFIX}_d.lib
-if(DEFINED LIB_ARCH_SUFFIX)
-        list(FILTER DEB_LIBS INCLUDE REGEX "^.+${LIB_ARCH_SUFFIX}_d\.lib$")
-endif()
-if(DEFINED EXCLUDE_LIB_ARCH_SUFFIX)
-        list(FILTER DEB_LIBS EXCLUDE REGEX "^.+${EXCLUDE_LIB_ARCH_SUFFIX}_d\.lib$")
-endif()
-
-# Exclude libraries for wide character
-# Result: <all label names>${LIB_ARCH_SUFFIX}_d.lib
-list(FILTER DEB_LIBS EXCLUDE REGEX "^.+W${LIB_ARCH_SUFFIX}_d\.lib$")
-# Exclude zlib because zlib will be installed as dependencies
-# Result: <all label names without zlib>${LIB_ARCH_SUFFIX}_d.lib
-list(FILTER DEB_LIBS EXCLUDE REGEX "^.+\/zlib${LIB_ARCH_SUFFIX}_d\.lib$")
-# Copy libraries for debug
+foreach(LIB_NAME IN LISTS LIB_NAMES)
+    list(APPEND DEB_LIBS ${EXTRACTED_DIR}/プロジェクトに追加すべきファイル_VC用/${LIB_NAME}_vs2015_${TRIPLET_SYSTEM_ARCH}_${DEB_LIB_LINKAGE}.lib)
+endforeach()
 file(INSTALL ${DEB_LIBS} DESTINATION ${CURRENT_PACKAGES_DIR}/debug/lib)
 
 ################################
